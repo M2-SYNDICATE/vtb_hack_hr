@@ -1,9 +1,18 @@
 import os.path
 import aspose.words as aw
 import re
+from pydantic import BaseModel,create_model
+from typing import Optional
 
 def clean_text(text: str) -> str:
-    return re.sub(r'[\x00-\x1F\x7F]', '', text).strip()
+    """
+    Function for clearing text from docx and e.t.c. formats
+    :param text: input text str
+    :return: clean text str
+    """
+    text = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', text)
+    text = re.sub(r'\s+', ' ', text)
+    return text.strip()
 def convert_to_text(file_list: list, file_num: int) -> str:
     """
     Function for converting file from list of links use in cycle to use on whole list.
@@ -30,19 +39,27 @@ def convert_to_text(file_list: list, file_num: int) -> str:
             return clean_text(filtered_text)
         except Exception as e:
             raise f"Ошибка при обработке {file}:{e}"
-def convert_to_dict(file:str) -> dict:
+def convert_to_dict(file: str) -> dict:
+    """
+    Function for converting cv describe to dict with key and values
+    :param file: selected path to the cv info
+    :return: dictionary formed from table from cv info where first column is key and second if values
+    """
     doc = aw.Document(file)
-    tables = doc.get_child_nodes(aw.NodeType.TABLE,True)
+    tables = doc.get_child_nodes(aw.NodeType.TABLE, True)
     if not tables:
         raise ValueError(f"В {file} нет таблиц")
-    table = tables[0]
-    table = table.as_table()
+
+    table = tables[0].as_table()
     result = {}
+
     for row in table.rows:
         row = row.as_row()
-        cell = row.cells
-        key = clean_text(cell[0].get_text().strip())
-        value = clean_text(cell[1].get_text().strip())
-        if key:
+        cells = row.cells
+        key = clean_text(cells[0].get_text())
+        value = clean_text(cells[1].get_text())
+
+        if key and value:   # <--- добавляем только если оба не пустые
             result[key] = value
+
     return result
