@@ -1,13 +1,6 @@
 import os.path
 import aspose.words as aw
 import re
-pdf_desc = r"D:\download\Описание ИТ.docx"
-pdf_cs_path = r"D:\pycharm\vtb_hack_hh\module1\pdf_cv"
-pdf_cv_list = [
-    os.path.join(pdf_cs_path, file)
-    for file in os.listdir(pdf_cs_path)
-    if os.path.isfile(os.path.join(pdf_cs_path, file))
-    ]
 
 def clean_text(text: str) -> str:
     return re.sub(r'[\x00-\x1F\x7F]', '', text).strip()
