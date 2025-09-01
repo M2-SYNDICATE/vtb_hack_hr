@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
 *.py[codz]
 *$py.class
 module1/pdf_cv
@@ -8,7 +9,10 @@ module1/pdf_cv
 entries.py
 # Distribution / packaging
 .Python
+testing_module1.py
 build/
+testing/
+/testing/ESpeech-TTS-1_RL-V2
 develop-eggs/
 dist/
 downloads/
@@ -144,6 +148,7 @@ ENV/
 env.bak/
 venv.bak/
 
+/venv_310
 # Spyder project settings
 .spyderproject
 .spyproject

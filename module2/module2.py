@@ -32,3 +32,4 @@ def question_block(info_cv: str, info_file: str) -> dict:
             )
     result = response.choices[0].message.parsed
     return result
+#print(question_block(info_cv=r"D:\download\Описание ИТ.docx", info_file=r"D:\pycharm\vtb_hack_hh\module1\pdf_cv\Образец резюме 2 Ведущий специалист ИТ.docx"))

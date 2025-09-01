@@ -3,13 +3,14 @@ from typing import List, Optional
 
 # --- Для вакансии ---
 class JobPosting(BaseModel):
-    comment: str   # описание вакансии или дополнительные инструкции
-    answer: bool   # можно использовать, если нужно подтверждение для проверки
+    comment: str
+    answer: bool
+    name: str | None
 
 # --- Новый класс для вопроса с примером ответа ---
 class QuestionWithAnswer(BaseModel):
     question: str
-    example_answer: Optional[str]  # сюда LLM будет подставлять пример ответа
+    example_answer: Optional[str]
 
 # --- Блоки вопросов ---
 class GeneralQuestions(BaseModel):

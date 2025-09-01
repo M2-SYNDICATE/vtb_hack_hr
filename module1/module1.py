@@ -2,6 +2,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 from convert_functions import pydantic_class, prompt, convert_functions
+import time
 
 load_dotenv()
 api_key = os.getenv("OPENROUTER_API_KEY")
@@ -45,12 +46,11 @@ def cv_validation(folder_cv_path: str, info_cv_path: str) -> dict:
         file = file_paths[i]
         try:
             info_cv = convert_functions.convert_to_text(file_list=file_paths, file_num=i)
-
             response = client.chat.completions.parse(
                 model="openai/gpt-oss-20b:free",
                 messages=prompt.prompt_info_fill(info=info_dict, cv_text=info_cv),
                 response_format=pydantic_class.JobPosting,
-                temperature=0.3,
+                temperature=0.2,
                 top_p=0.95
                 )
 
@@ -61,7 +61,7 @@ def cv_validation(folder_cv_path: str, info_cv_path: str) -> dict:
                 }
             print(f"Обработан файл: {file}")
             print(result)
-
+            time.sleep(1)
         except Exception as e:
             print(f"Ошибка при обработке файла {file}: {e}")
             result_dict[file] = {"error": str(e)}
