@@ -57,7 +57,8 @@ def cv_validation(folder_cv_path: str, info_cv_path: str) -> dict:
             result = response.choices[0].message.parsed
             result_dict[file] = {
                 "answer": result.answer,
-                "comment": result.comment
+                "comment": result.comment,
+                "name": result.name
                 }
             print(f"Обработан файл: {file}")
             print(result)
