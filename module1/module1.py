@@ -37,7 +37,7 @@ def cv_validation(folder_cv_path: str, info_cv_path: str) -> dict:
     except Exception as e:
         raise Exception(f"Ошибка при обработке файлов в папке {folder_cv_path}: {e}")
     try:
-        info_dict = convert_functions.convert_to_dict(file=info_cv_path)
+        info_dict,_ = convert_functions.convert_to_dict(file=info_cv_path)
     except Exception as e:
         raise Exception(f"Ошибка при обработке файла с описанием вакансии {info_cv_path}: {e}")
 
@@ -55,7 +55,6 @@ def cv_validation(folder_cv_path: str, info_cv_path: str) -> dict:
                 )
             #print(response)
             result = response.choices[0].message.parsed
-            print(result)
             result_dict[file] = {
                 "answer": result.answer,
                 "comment": result.analysis.comment,
@@ -63,6 +62,7 @@ def cv_validation(folder_cv_path: str, info_cv_path: str) -> dict:
                 "experience": result.analysis.experience
                 }
             print(f"Обработан файл: {file}")
+            print(result_dict)
             time.sleep(1)
         except Exception as e:
             print(f"Ошибка при обработке файла {file}: {e}")

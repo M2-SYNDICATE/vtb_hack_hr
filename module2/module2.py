@@ -17,7 +17,7 @@ def question_block(info_cv: str, info_file: str) -> dict:
     :param info_file: path to candidate with True value
     :return: returns dict with answers dict[dict[question,answer]
     """
-    info = convert_to_dict(info_cv)
+    info,_= convert_to_dict(info_cv)
     info_cv = convert_to_text(info_file,file_num=0)
     client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
