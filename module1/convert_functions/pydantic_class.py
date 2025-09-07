@@ -14,7 +14,7 @@ class Analysis(BaseModel):
     name: Optional[str] = Field(
         description="Имя кандидата из резюме. Null, если не найдено."
     )
-    experience: str = Field(
+    experience: list = Field(
         description="Краткая выжимка релевантного опыта работы из резюме."
     )
     contact_data: Optional[list] = Field(
