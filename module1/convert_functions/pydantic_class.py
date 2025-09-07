@@ -17,6 +17,13 @@ class Analysis(BaseModel):
     experience: str = Field(
         description="Краткая выжимка релевантного опыта работы из резюме."
     )
+    contact_data: Optional[list] = Field(
+        description="Контакты для связи. Null, если не найдено."
+        )
+    answer: bool = Field(
+        description="Подходит для работы да или нет. True or False"
+        )
+
 
 class CvValidationResult(BaseModel):
     analysis: Analysis = Field(

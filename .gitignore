@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-
+module1/results
 *.py[codz]
 *$py.class
 module1/pdf_cv
@@ -10,6 +10,7 @@ entries.py
 # Distribution / packaging
 .Python
 testing_module1.py
+run_and_save.py
 build/
 testing/
 /testing/ESpeech-TTS-1_RL-V2
